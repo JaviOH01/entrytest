@@ -3,8 +3,10 @@ package entrytest.t2c.concesionarios.entrytest.controller;
 import entrytest.t2c.concesionarios.entrytest.service.CocheService;
 import entrytest.t2c.concesionarios.entrytest.persistence.model.Coche;
 import entrytest.t2c.concesionarios.entrytest.service.dto.CocheDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -27,15 +29,27 @@ public class CocheController {
         return this.cocheService.getAllCoches();
     }
 
-    @GetMapping("{matricula}")
-    public Coche buscarCocheMatricula(@PathVariable("matricula") String matricula){
-        return cocheService.getCocheByMatricula(matricula);
+    @GetMapping("/fecha/{fechaIngreso}")
+    public List<LocalDate> getCocheByFechaIngreso(@PathVariable("fechaIngreso") LocalDate fechaIngreso){
+        return this.cocheService.getCocheByFechaIngreso(fechaIngreso);
     }
 
-    @DeleteMapping("{coche}")
+    @PatchMapping("/modificar_Coche_Vendido/{id}")
+    public ResponseEntity<Void>modificarCocheVendido(@PathVariable("id") Long id){
+        this.cocheService.modificarCocheVendido(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Void>deleteCoche(@PathVariable("id") Long id){
+        this.cocheService.deleteCoche(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /*@DeleteMapping("{coche}")
     public void deleteCocheMatricula(@PathVariable("coche") Coche coche){
         if(coche.isVendido()){
             cocheService.deleteCoche(cocheService.getCocheByMatricula(coche.getMatricula()));
         }
-    }
+    }*/
 }

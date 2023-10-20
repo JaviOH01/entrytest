@@ -1,11 +1,15 @@
 package entrytest.t2c.concesionarios.entrytest.service;
 
+import entrytest.t2c.concesionarios.entrytest.exceptions.MyExceptions;
 import entrytest.t2c.concesionarios.entrytest.mapper.CocheDTOToCoche;
 import entrytest.t2c.concesionarios.entrytest.persistence.model.Coche;
 import entrytest.t2c.concesionarios.entrytest.persistence.repository.CocheRepository;
 import entrytest.t2c.concesionarios.entrytest.service.dto.CocheDTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,18 +29,34 @@ public class CocheService {
         return this.cocheRepository.save(coche);
     }
 
-    public Coche getCocheByMatricula(String matricula){
-        Optional<Coche> optionalCoche = cocheRepository.findById(matricula);
-        return optionalCoche.get();
+    public List<LocalDate> getCocheByFechaIngreso(LocalDate fechaIngreso){
+        return this.cocheRepository.findAllByFechaIngreso(fechaIngreso);
     }
 
     public List<Coche> getAllCoches(){
         return this.cocheRepository.findAll();
     }
 
-    public void deleteCoche(Coche coche){
-        if(!coche.isVendido()){
-            cocheRepository.deleteById(coche.getMatricula());
-        }
+    @Transactional
+    public void modificarCocheVendido(Long id){
+        Optional<Coche> optionalCoche = this.cocheRepository.findById(id);
+        /*if (optionalCoche.isEmpty()){
+            throw new MyExceptions("Este coche no existe", HttpStatus.NOT_FOUND);
+        }*/
+        this.cocheRepository.modificarCocheVendido(id);
     }
+
+    public void deleteCoche(Long id){
+        this.cocheRepository.deleteById(id);
+    }
+
+    /*public void deleteCoche(Coche coche){
+        if(!coche.isVendido()){
+            Optional<Coche> optionalCoche = this.cocheRepository.findById(coche.getId());
+        if (optionalCoche.isEmpty()){
+            throw new MyExceptions("Este coche no existe", HttpStatus.NOT_FOUND);
+        }
+            this.cocheRepository.deleteById(coche.getId());
+        }
+    }*/
 }
