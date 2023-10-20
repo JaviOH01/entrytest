@@ -1,20 +1,24 @@
-package entrytest.t2c.concesionarios.entrytest.model;
+package entrytest.t2c.concesionarios.entrytest.persistence.model;
+
+import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.regex.Pattern;
 
+@Data
 @Entity
 @Table(name = "coches")
 public class Coche {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String matricula;
     //Tengo que darle el formato de matricula
     //Pattern pattern = Pattern.compile("(\\d{1,4})([A-z]{1,3})");
     private String marca;
     private double coste;
-    private Date fechaIngreso;
+    private LocalDate fechaIngreso;
     private boolean vendido;
     private double precioVenta;
 
@@ -42,11 +46,11 @@ public class Coche {
         this.coste = coste;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

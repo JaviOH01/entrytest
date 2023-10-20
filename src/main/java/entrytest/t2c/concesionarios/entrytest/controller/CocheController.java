@@ -1,27 +1,30 @@
 package entrytest.t2c.concesionarios.entrytest.controller;
 
-import entrytest.t2c.concesionarios.entrytest.CocheService;
-import entrytest.t2c.concesionarios.entrytest.model.Coche;
-import org.springframework.beans.factory.annotation.Autowired;
+import entrytest.t2c.concesionarios.entrytest.service.CocheService;
+import entrytest.t2c.concesionarios.entrytest.persistence.model.Coche;
+import entrytest.t2c.concesionarios.entrytest.service.dto.CocheDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/coches")
+@RequestMapping("/coches")
 public class CocheController {
 
-    @Autowired
-    private CocheService cocheService;
+    private final CocheService cocheService;
+
+    public CocheController(CocheService cocheService) {
+        this.cocheService = cocheService;
+    }
 
     @PostMapping
-    public Coche createCoche(Coche coche){
-        return cocheService.createCoche(coche);
+    public Coche createCoche(@RequestBody CocheDTO cocheDTO){
+        return this.cocheService.createCoche(cocheDTO);
     }
 
     @GetMapping
     public List<Coche> getAllCoches(){
-        return cocheService.getAllCoches();
+        return this.cocheService.getAllCoches();
     }
 
     @GetMapping("{matricula}")
