@@ -40,7 +40,7 @@ public class CocheController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void>deleteCoche(@PathVariable("id") Long id){
         this.cocheService.deleteCoche(id);
         return ResponseEntity.noContent().build();
