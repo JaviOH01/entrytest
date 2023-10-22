@@ -3,13 +3,14 @@ package entrytest.t2c.concesionarios.entrytest.persistence.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 @Data
 @Entity
 @Table(name = "coches")
-public class Coche {
+public class Coche implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -21,6 +22,11 @@ public class Coche {
     private LocalDate fechaIngreso;
     private boolean vendido;
     private double precioVenta;
+
+    /*Relacion uno a muchos entre las tablas coches y concesionarios*/
+    @ManyToOne(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
+    @JoinColumn(name = "concesionarios_direccion")
+    private Concesionario cocheConcesionario;
 
     public String getMatricula() {
         return matricula;
