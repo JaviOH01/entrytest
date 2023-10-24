@@ -16,6 +16,6 @@ public interface CocheRepository extends JpaRepository<Coche, Long> {
     public List<LocalDate> findAllByFechaIngreso(LocalDate fechaIngreso);
 
     @Modifying
-    @Query(value = "UPDATE COCHE SET VENDIDO=true WHERE ID=:id", nativeQuery = true)
+    @Query(value = "UPDATE COCHES SET VENDIDO=true WHERE ID=:id", nativeQuery = true)
     public void modificarCocheVendido(@Param("id") Long id);
 }

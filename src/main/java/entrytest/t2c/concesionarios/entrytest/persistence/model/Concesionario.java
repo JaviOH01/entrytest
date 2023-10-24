@@ -18,7 +18,7 @@ public class Concesionario implements Serializable {
     private String direccion;
 
     /*Relacion uno a muchos entre las tablas coches y concesionarios*/
-    @OneToMany(mappedBy = "concesionarioCoches", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cocheConcesionario", cascade = CascadeType.ALL)
     private List<Coche> listaCoches;
 
     public String getDireccion() {

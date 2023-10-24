@@ -29,12 +29,12 @@ public class CocheController {
         return this.cocheService.getAllCoches();
     }
 
-    @GetMapping("/fecha/{fechaIngreso}")
+    @GetMapping("/fechaIngreso/{fechaIngreso}")
     public List<LocalDate> getCocheByFechaIngreso(@PathVariable("fechaIngreso") LocalDate fechaIngreso){
         return this.cocheService.getCocheByFechaIngreso(fechaIngreso);
     }
 
-    @PatchMapping("/modificar_Coche_Vendido/{id}")
+    @PatchMapping("/modificar_coche_vendido/{id}")
     public ResponseEntity<Void>modificarCocheVendido(@PathVariable("id") Long id){
         this.cocheService.modificarCocheVendido(id);
         return ResponseEntity.noContent().build();

@@ -39,8 +39,8 @@ public class CocheService {
 
     @Transactional
     public void modificarCocheVendido(Long id){
-        Optional<Coche> optionalCoche = this.cocheRepository.findById(id);
-        /*if (optionalCoche.isEmpty()){
+        /*Optional<Coche> optionalCoche = this.cocheRepository.findById(id);
+        if (optionalCoche.isEmpty()){
             throw new MyExceptions("Este coche no existe", HttpStatus.NOT_FOUND);
         }*/
         this.cocheRepository.modificarCocheVendido(id);
