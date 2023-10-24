@@ -29,7 +29,7 @@ public class CocheService {
         return this.cocheRepository.save(coche);
     }
 
-    public List<LocalDate> getCocheByFechaIngreso(LocalDate fechaIngreso){
+    public List<Coche> getCocheByFechaIngreso(Coche fechaIngreso){
         return this.cocheRepository.findAllByFechaIngreso(fechaIngreso);
     }
 

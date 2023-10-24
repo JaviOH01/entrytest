@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public interface CocheRepository extends JpaRepository<Coche, Long> {
 
-    public List<LocalDate> findAllByFechaIngreso(LocalDate fechaIngreso);
+    public List<Coche> findAllByFechaIngreso(Coche fechaIngreso);
 
     @Modifying
     @Query(value = "UPDATE COCHES SET VENDIDO=true WHERE ID=:id", nativeQuery = true)

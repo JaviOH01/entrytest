@@ -30,7 +30,8 @@ public class CocheController {
     }
 
     @GetMapping("/fechaIngreso/{fechaIngreso}")
-    public List<LocalDate> getCocheByFechaIngreso(@PathVariable("fechaIngreso") LocalDate fechaIngreso){
+    public List<Coche> getCocheByFechaIngreso(@PathVariable("fechaIngreso") Coche fechaIngreso){
+        //LocalDate fecha = fechaIngreso.getFechaIngreso();
         return this.cocheService.getCocheByFechaIngreso(fechaIngreso);
     }
 
